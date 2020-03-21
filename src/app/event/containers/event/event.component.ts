@@ -10,6 +10,7 @@ import { getSpinner } from '../../../state/spinner/spinner.selectors';
 
 import { LoadAttendees } from '../../state/attendees/attendees.actions';
 import { State } from '../../state';
+import { getAttendees } from '../../state/attendees/attendees.selectors';
 
 @Component({
   selector: 'app-event',
@@ -30,7 +31,7 @@ export class EventComponent implements OnInit {
     this.store.dispatch(new LoadAttendees());
     // this.getAttendees();
     this.spinner$ = this.store.pipe(select(getSpinner));
-    this.attendees$ = this.store.pipe(select(state => state.event.attendees.attendees));
+    this.attendees$ = this.store.pipe(select(getAttendees));
   }
 
   getAttendees() {
