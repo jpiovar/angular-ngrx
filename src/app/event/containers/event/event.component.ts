@@ -4,10 +4,12 @@ import { Store, select } from '@ngrx/store';
 
 import { Attendee } from '../../../models';
 import { EventService } from '../../services/event.service';
-import { State } from '../../../state/state';
+
 import { StartSpinner, StopSpinner } from '../../../state/spinner/spinner.actions';
 import { getSpinner } from '../../../state/spinner/spinner.selectors';
 
+import { LoadAttendees } from '../../state/attendees/attendees.actions';
+import { State } from '../../state';
 
 @Component({
   selector: 'app-event',
@@ -19,11 +21,16 @@ export class EventComponent implements OnInit {
   spinner$: Observable<boolean>;
   attendees$: Observable<Attendee[]>;
 
-  constructor(private store: Store<State>, private eventService: EventService) {}
+  constructor(
+    private store: Store<State>,
+    private eventService: EventService
+  ) {}
 
   ngOnInit(): void {
-    this.getAttendees();
+    this.store.dispatch(new LoadAttendees());
+    // this.getAttendees();
     this.spinner$ = this.store.pipe(select(getSpinner));
+    this.attendees$ = this.store.pipe(select(state => state.event.attendees.attendees));
   }
 
   getAttendees() {
