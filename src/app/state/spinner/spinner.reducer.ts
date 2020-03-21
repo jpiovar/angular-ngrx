@@ -1,3 +1,6 @@
+import { SpinnerActionTypes, SpinnerActions } from './spinner.actions';
+import { spinnerStatus } from './spinner.types';
+
 export interface State {
   isOn: boolean;
 }
@@ -6,15 +9,17 @@ export const initialState: State = {
   isOn: false
 };
 
-export function reducer(state = initialState, action): State {
+export function reducer(state: State = initialState, action: SpinnerActions): State {
   switch (action.type) {
-    case 'startSpinner': {
+    case SpinnerActionTypes.StartSpinner: {
+      debugger;
+      const newState = action.payload;
       return {
-        isOn: true
+        ...state, ...newState
       };
     }
 
-    case 'stopSpinner': {
+    case SpinnerActionTypes.StopSpinner: {
       return {
         isOn: false
       };

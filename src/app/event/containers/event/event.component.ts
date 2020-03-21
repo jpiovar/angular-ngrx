@@ -5,6 +5,8 @@ import { Store, select } from '@ngrx/store';
 import { Attendee } from '../../../models';
 import { EventService } from '../../services/event.service';
 import { State } from '../../../state/state';
+import { StartSpinner, StopSpinner } from '../../../state/spinner/spinner.actions';
+
 
 
 @Component({
@@ -37,11 +39,11 @@ export class EventComponent implements OnInit {
   //   console.log('TCL: EventComponent -> addAttendee -> this.attendees', this.attendees);
   // }
   addAttendee(attendee: Attendee) {
-    this.store.dispatch({ type: 'startSpinner' });
+    this.store.dispatch(new StartSpinner());
     this.eventService
       .addAttendee(attendee).subscribe(() => {
         this.getAttendees()
-        this.store.dispatch({ type: 'stopSpinner' });
+        this.store.dispatch(new StopSpinner());
       });
   }
 

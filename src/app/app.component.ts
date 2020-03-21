@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { StartSpinner, StopSpinner } from './state/spinner/spinner.actions';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +21,9 @@ export class AppComponent implements OnInit {
 
   clicker() {
     debugger;
-    this.store.dispatch({ type: 'startSpinner' });
+    this.store.dispatch(new StartSpinner());
     setTimeout(() => {
-      this.store.dispatch({ type: 'stopSpinner' });
+      this.store.dispatch(new StopSpinner());
     }, 2000);
   }
 }
