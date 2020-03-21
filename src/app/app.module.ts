@@ -12,6 +12,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './app.db';
 import { reducer as spinnerReducer } from './state/spinner/spinner.reducer';
 import { environment } from '../environments/environment.prod';
+import { StoreRouterConnectingModule, routerReducer, RouterStateSerializer, NavigationActionTiming } from '@ngrx/router-store';
+import { CustomSerializer } from './shared/utils';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,20 @@ import { environment } from '../environments/environment.prod';
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 100 }),
-    StoreModule.forRoot({ spinner: spinnerReducer }),
+    StoreModule.forRoot({
+      spinner: spinnerReducer,
+      router: routerReducer
+    }),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer,
+    }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       name: 'NgRx Demo App',
       logOnly: environment.production
+    }),
+    StoreRouterConnectingModule.forRoot({
+      navigationActionTiming: NavigationActionTiming.PostActivation,
     })
   ],
   providers: [],
