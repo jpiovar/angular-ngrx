@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { spinnerStatus } from './spinner.types';
+import { State } from './spinner.reducer';
 
 export enum SpinnerActionTypes {
   StartSpinner = '[Spinner Page] Start Spinner',
@@ -8,7 +8,7 @@ export enum SpinnerActionTypes {
 
 export class StartSpinner implements Action {
   readonly type = SpinnerActionTypes.StartSpinner;
-  constructor(public payload: spinnerStatus = { isOn: true }) {}
+  constructor(public payload: State = { isOn: true }) {}
 }
 
 export class StopSpinner implements Action {

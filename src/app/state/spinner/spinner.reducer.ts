@@ -1,5 +1,4 @@
 import { SpinnerActionTypes, SpinnerActions } from './spinner.actions';
-import { spinnerStatus } from './spinner.types';
 
 export interface State {
   isOn: boolean;
