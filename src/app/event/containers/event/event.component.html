@@ -2,3 +2,4 @@
 <app-add-attendee (addAttendee)="addAttendee($event)"></app-add-attendee>
 <!-- <app-event-list [attendees]="attendees"></app-event-list> -->
 <app-event-list [attendees]="attendees$ | async"></app-event-list>
+<div *ngIf="spinner$ | async">loading..</div>

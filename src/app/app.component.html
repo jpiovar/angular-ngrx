@@ -5,3 +5,6 @@
 </div>
 ​
 <router-outlet></router-outlet>
+
+<span (click)="clicker()"> clicker spinner globally accessible </span>
+<div *ngIf="spinner$ | async">loading..</div>
